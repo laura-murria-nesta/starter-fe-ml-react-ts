@@ -2,7 +2,6 @@ import './App.css';
 import React from "react";
 import { useState } from "react";
 import { Report } from './Report';
-import { InputForm } from './form/InputForm';
 import { InputParams, predict, Result } from './model';
 import { Alert, Box, Grid, StyledEngineProvider } from '@mui/material';
 import { InputWizard } from './form/InputWizard';
@@ -12,18 +11,6 @@ export default function App() {
   const [ result, setResult ] = useState(null as Result | null );
   const [ error, setError ] = useState(null as string | null);
 
-  const handleSubmitInput = async (input: InputParams) => {
-    try { 
-      const result = await predict(input);
-      setResult(result);
-      setError(null);
-    } catch (err) {
-      const code = 'E1001';
-      const mess = 'Unable to generate prediction';
-      console.error(`${code}: ${mess}. ${err}`);
-      setError(`${mess}. ${code}`);
-    }
-  };
 
   const reset = () => {
     setError(null);
