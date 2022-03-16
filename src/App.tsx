@@ -2,9 +2,10 @@ import './App.css';
 import React from "react";
 import { useState } from "react";
 import { Report } from './Report';
-import { InputForm } from './InputForm';
+import { InputForm } from './form/InputForm';
 import { InputParams, predict, Result } from './model';
 import { Alert, Box, Grid, StyledEngineProvider } from '@mui/material';
+import { InputWizard } from './form/InputWizard';
 
 export default function App() {
 
@@ -53,7 +54,7 @@ export default function App() {
               </Grid>
             </Grid>
             <Grid item xs={12} sm={6}>
-              <InputForm handleSubmit={handleSubmitInput}/>
+              <InputWizard />
             </Grid>
           </Grid>
         : 
