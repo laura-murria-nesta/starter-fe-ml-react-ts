@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Button, FormControl, Grid, TextField, RadioGroup, FormControlLabel, Radio, InputLabel, MenuItem, Select } from '@mui/material';
-import { InputParams } from "./model";
+import { InputParams } from "../model";
 
 
 export function InputForm(props: { handleSubmit: (input: InputParams)=> {}}) {
