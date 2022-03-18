@@ -5,6 +5,7 @@ import { Report } from './Report';
 import { Alert, Box, Grid, StyledEngineProvider } from '@mui/material';
 import { Field, Form, Formik } from 'formik';
 import { InputParams, Result } from './model';
+import ButtonBases from './form/BoilerControlSelect';
 
 export default function App() {
 
@@ -77,6 +78,9 @@ export default function App() {
                 <div>Hot water cylinder state: {inputParams.isHWCylinder}</div>
                 </>
                 : null }
+            </Grid>
+            <Grid>
+                <ButtonBases />
             </Grid>
           </Grid>
         : 
