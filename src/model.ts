@@ -1,7 +1,15 @@
 export type InputParams = {
-    radio1: string,
-    dropdown1: string,
-    value1: number,
+    isCombiBoiler: string,
+    isHWCylinder: string,
+    boilerControls: BoilerControls,
+}
+
+export enum BoilerControls {
+    buttons = 'Buttons',
+    oneDial = 'One Dial',
+    multipleDials = 'Multiple Dials',
+    unknown = 'Unknown',
+    inaccessible = 'Inaccessible'
 }
 
 export type Result = {
@@ -12,3 +20,5 @@ export const predict = (input: InputParams): Result => {
 
     return {output: 99} as Result;
 };
+
+
