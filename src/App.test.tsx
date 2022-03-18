@@ -4,6 +4,6 @@ import App from './App';
 
 test('My app loaded', () => {
   render(<App />);
-  const linkElement = screen.getByText(/boiler/i);
+  const linkElement = screen.getByText(/Heating/i);
   expect(linkElement).toBeInTheDocument();
 });
