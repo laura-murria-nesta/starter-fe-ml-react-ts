@@ -43,23 +43,23 @@ export default function App() {
                         <Grid item xs={12} sm={6}>
                             <div id="combi-radio-group">Combi boiler?</div>
                             <div role="group" aria-labelledby="combi-radio-group" className="radio-toolbar">
-                                <label>
-                                <Field type="radio" name="isCombiBoiler" value={true}/>
+                                <label htmlFor="isCombiBoiler">
+                                <Field type="radio" name="isCombiBoiler" value="yes" />
                                 Yes
                                 </label>
                                 <label>
-                                <Field type="radio" name="isCombiBoiler" value={false} />
+                                <Field type="radio" name="isCombiBoiler" value="no" />
                                 No
                                 </label>
                             </div>
                             <div id="hwcylinder-radio-group">Hot water cylinder?</div>
-                            <div role="group" aria-labelledby="hwcylinder-radio-group" className="radio-toolbar">
+                            <div role="group" aria-labelledby="hwcylinder-radio-group" >
                                 <label>
-                                <Field type="radio" name="isHWCylinder" value={true}/>
+                                <Field type="radio" name="isHWCylinder" value="yes"/>
                                 Yes
                                 </label>
                                 <label>
-                                <Field type="radio" name="isHWCylinder" value={false} />
+                                <Field type="radio" name="isHWCylinder" value="no" />
                                 No
                                 </label>
                             </div>

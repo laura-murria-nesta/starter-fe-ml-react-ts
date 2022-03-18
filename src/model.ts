@@ -1,6 +1,6 @@
 export type InputParams = {
-    isCombiBoiler: boolean,
-    isHWCylinder: boolean,
+    isCombiBoiler: string,
+    isHWCylinder: string,
     boilerControls: BoilerControls,
 }
 
