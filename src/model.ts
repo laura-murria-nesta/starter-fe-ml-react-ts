@@ -1,8 +1,15 @@
 export type InputParams = {
     isCombiBoiler: boolean,
     isHWCylinder: boolean,
-    dropdown1: string,
-    value1: number,
+    boilerControls: BoilerControls,
+}
+
+export enum BoilerControls {
+    buttons = 'Buttons',
+    oneDial = 'One Dial',
+    multipleDials = 'Multiple Dials',
+    unknown = 'Unknown',
+    inaccessible = 'Inaccessible'
 }
 
 export type Result = {
