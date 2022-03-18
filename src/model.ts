@@ -1,24 +1,19 @@
-export type InputParams = {
-    isCombiBoiler: string,
-    isHWCylinder: string,
-    boilerControls: BoilerControls,
-}
+import { EPC, ExistingHeatingInfo, PremisesInfo } from "./data";
 
-export enum BoilerControls {
-    buttons = 'Buttons',
-    oneDial = 'One Dial',
-    multipleDials = 'Multiple Dials',
-    unknown = 'Unknown',
-    inaccessible = 'Inaccessible'
+export type InputParams = {
+    existingHeatingInfo: ExistingHeatingInfo,
+    premisesInfo: PremisesInfo,
+    EPC: EPC | null,
 }
 
 export type Result = {
-    output: number,
+    typicalHPUnitCost: number | null,
+    typicalTotalCost: number,
+    typicalHPUnitCapacity: number | null,
 }
 
 export const predict = (input: InputParams): Result => {
-
-    return {output: 99} as Result;
+    return {typicalTotalCost: 10000} as Result;
 };
 
 

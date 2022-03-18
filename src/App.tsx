@@ -1,6 +1,6 @@
 import './App.css';
 import React from "react";
-import BoilerAdvice from './BoilerAdvice';
+import HeatPumpAdvice from './HeatPumpAdvice';
 
 
 export default function App() {
@@ -8,7 +8,7 @@ export default function App() {
   return ( 
     <>
     <h2>Home Heating Advice</h2>
-    <BoilerAdvice />
+    <HeatPumpAdvice />
     </>
   ); 
 }
