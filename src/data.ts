@@ -27,7 +27,8 @@ export enum NumRooms {
 export enum PremiseType {
     Detached = "Detached",
     SemiDetached = "Semi-Detached",
-    Terraced = "Terraced",
+    MidTerraced = "Mid-Terraced",
+    EndTerraced = "End-Terraced",
     Bungalow = "Bungalow",
     Flat = "Flat",
 }

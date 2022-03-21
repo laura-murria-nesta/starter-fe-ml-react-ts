@@ -1,121 +1,75 @@
 import { useState } from "react";
-import { Report } from './Report';
-import { Alert, Box, Grid, StyledEngineProvider } from '@mui/material';
-import { Field, Form, Formik } from 'formik';
-import { BoilerControls } from './data';
-import { InputParams, Result } from './model';
+import { Alert, Box, Button,StyledEngineProvider } from '@mui/material';
+
+import {  PremisesInfo } from './data';
+import { InputParams, Result, predict } from './model';
 
 import './App.css';
 import './form.css';
+import { ASHPBudget, generateASHPBudget } from "./budget";
+import { ASHPBudgetReport } from "./ASHPBudgetReport";
+import { PropertyInput } from "./form/PropertyInput";
 
 export default function App() {
 
+  const [ budget, setBudget ] = useState(null as ASHPBudget | null );
+  // TODO - dont keep result as well as budget in state in final version
   const [ result, setResult ] = useState(null as Result | null );
+  const [ premisesInfo, setPremisesInfo ] = useState({} as PremisesInfo);
   const [ error, setError ] = useState(null as string | null);
-  const [ inputParams, setInputParams ] = useState({} as InputParams);
 
-  const reset = () => {
+
+  const handleSubmitPremisesInfo = (premInfo: PremisesInfo) => {
+    try { 
+      setPremisesInfo(premInfo);
+      const result = predict({ premisesInfo } as InputParams);
+      setResult(result);
+      const budget = generateASHPBudget(result);
+      setBudget(budget);
+    } catch (error) {
+      const errMess = `Unable to estimate heat pump costs for this property at this time: ${error}`;
+      console.log(errMess);
+      setError(errMess);
+    }
+  }
+
+  const resetOutput = () => {
     setError(null);
     setResult(null);
+    setBudget(null);
+  };
+
+  const resetInput = () => {
+    setError(null);
+    setPremisesInfo({} as PremisesInfo);
+    resetOutput();
   };
 
   return ( 
     <StyledEngineProvider injectFirst>
       <Box sx={{ border: 3, padding: 5, minHeight: 400 }} >
       {error ? <Alert severity="error">{error}</Alert> : null}
-      Optimise your boiler
+      How much might a Heat Pump cost me?
       {
-      // If result is not yet known, this is the start - collect input 
-      (!result)
+      // If budget is not yet known, this is the start - collect input 
+      (!budget)
         ?
-            <Formik
-                initialValues={{...inputParams}}
-                onSubmit={async (values) => {
-                    setInputParams(
-                      values as InputParams);
-                }}
-                >
-                {({ values }) => (
-                    <Form>
-                    <Grid container spacing={2} flexWrap='wrap'>
-                        <Grid item xs={12} sm={6}>
-                            <div id="combi-radio-group">Combi boiler?</div>
-                            <div role="group" aria-labelledby="combi-radio-group" className="radio-toolbar">
-                                <label htmlFor="existingHeatingInfo.isCombiBoiler">
-                                <Field type="radio" name="existingHeatingInfo.isCombiBoiler" value="yes" />
-                                Yes
-                                </label>
-                                <label>
-                                <Field type="radio" name="existingHeatingInfo.isCombiBoiler" value="no" />
-                                No
-                                </label>
-                            </div>
-                            <div id="hwcylinder-radio-group">Hot water cylinder?</div>
-                            <div role="group" aria-labelledby="hwcylinder-radio-group" >
-                                <label>
-                                <Field type="radio" name="existingHeatingInfo.isHWCylinder" value="yes"/>
-                                Yes
-                                </label>
-                                <label>
-                                <Field type="radio" name="existingHeatingInfo.isHWCylinder" value="no" />
-                                No
-                                </label>
-                            </div>
-                        </Grid>
-                        <Grid>
-                            <div id="controls-radio-group">What do your boiler controls look like?</div>
-                            <div role="group" aria-labelledby="controls-radio-group" className="radio-toolbar"  >
-                                <label>
-                                <Field type="radio" name="existingHeatingInfo.boilerControls" value={BoilerControls.buttons}/>
-                                 <img src='/images/boiler_buttons.png' alt={BoilerControls.buttons}></img>
-                                </label>
-                                <label>
-                                <Field type="radio" name="existingHeatingInfo.boilerControls" value={BoilerControls.multipleDials}/>
-                                 <img src='/images/multiple_dials.png' alt={BoilerControls.multipleDials}></img>
-                                </label>
-                                <label>
-                                <Field type="radio" name="existingHeatingInfo.boilerControls" value={BoilerControls.oneDial}/>
-                                 <img src='/images/one_dial.png' alt={BoilerControls.oneDial}></img>
-                                </label>
-                                <label>
-                                <Field type="radio" name="existingHeatingInfo.boilerControls" value={BoilerControls.unknown}/>
-                                 My controls look different
-                                </label>
-                                <label>
-                                <Field type="radio" name="existingHeatingInfo.boilerControls" value={BoilerControls.inaccessible}/>
-                                 I can't see my controls
-                                </label>
-                            </div>
-                        </Grid>
-                        <button type="submit">Submit</button>
-
-                        <div>Combi boiler form: {values.existingHeatingInfo?.isCombiBoiler}</div>
-                        <div>Hot water cylinder form: {values.existingHeatingInfo?.isHWCylinder}</div>
-                        <div>Boiler controls form: {values.existingHeatingInfo?.boilerControls}</div>
-                    </Grid>
-                    </Form>
-                )} 
-                </Formik>
+        <PropertyInput premisesInfo={premisesInfo} onSubmit={handleSubmitPremisesInfo} />
         : 
         <>
-          {/* Once result is present show report */}
-          { (result)
+          {/* Once budget is present show report */}
+          { (budget)
           ?
-            <Report 
-              result={result}
-              reset={reset}
+            <ASHPBudgetReport 
+              budget={budget}
             />
-          : <Alert severity="error">Could not generate result for this input</Alert>}
+
+          : <Alert severity="error">Could not display budget report for this input</Alert>}
         </>
       }
       </Box>
-      { inputParams ? 
-                <>
-                <div>Combi boiler state: {inputParams.existingHeatingInfo?.isCombiBoiler}</div>
-                <div>Hot water cylinder state: {inputParams.existingHeatingInfo?.isHWCylinder}</div>
-                <div>Boiler controls state: {inputParams.existingHeatingInfo?.boilerControls}</div>
-                </>
-                : null }
+      <Button onClick={()=> resetInput()}>Restart</Button>
+      <Button onClick={()=> resetOutput()}>Recalculate</Button>
     </StyledEngineProvider> 
   ); 
 }
