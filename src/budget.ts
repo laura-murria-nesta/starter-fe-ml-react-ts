@@ -53,13 +53,16 @@ export const asRange = (figure: number): CostRange => {
     const calcLower = (f: number) => f * 0.85 ;
     const calcHigher = (f: number) => f * 1.15;
     const cost = {
-        lower: calcLower(figure),
-        typical: figure,
-        higher: calcHigher(figure),
+        lower: roundToPence(calcLower(figure)),
+        typical: roundToPence(figure),
+        higher: roundToPence(calcHigher(figure)),
     } as CostRange;
     return cost;
 }
 
+export const roundToPence = (x:number) => Math.round(x * 100) / 100;
+
+// TODO - test for with/without VAT and vat amount
 export const asBreakdown = (cost: Cost, point: RangePoint): Breakdown => {
     switch (point) {
         case (RangePoint.higher): 
@@ -142,9 +145,12 @@ export const generateASHPBudget = (prediction: Result): ASHPBudget => {
     const budget = {
         total,
         unit,
-        labour: asCost(2000, VatPercent.standard, true, CostCategory.labour),
-        otherMaterials: asCost(1500, VatPercent.standard, true, CostCategory.labour),
-        design: asCost(700, VatPercent.standard, true, CostCategory.labour),
+        labour: null,
+        otherMaterials: null,
+        design: null,
+        // labour: asCost(2000, VatPercent.standard, true, CostCategory.labour),
+        // otherMaterials: asCost(1500, VatPercent.standard, true, CostCategory.labour),
+        // design: asCost(700, VatPercent.standard, true, CostCategory.labour),
         heatDistUpgrades: null,
         fabricEEUpgrades: null,
     } as ASHPBudget;
