@@ -8,8 +8,14 @@ export type InputParams = {
 
 export type HPReadyAdvice = {
     adviceCode: number,
+    nextSteps: number[],
+    activismActions: number[],
 }
 
 export const advise = (input: InputParams): HPReadyAdvice => {
-    return {adviceCode: 1} as HPReadyAdvice;
+    return { 
+        nextSteps: [1,2,3],
+        adviceCode: 1,
+        activismActions: [ 2,3 ]
+    } as HPReadyAdvice;
 };
