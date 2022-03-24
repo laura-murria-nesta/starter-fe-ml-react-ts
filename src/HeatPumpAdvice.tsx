@@ -12,6 +12,7 @@ import { PropertyInput } from "./form/PropertyInput";
 import { advise, HPReadyAdvice } from "./adviseHPReady";
 import { HeatingSystemInput } from "./form/HeatingSystemInput";
 import { HPReadyReport } from "./report/HPReadyReport";
+import { HPTypicalQuote } from "./report/HPTypicalQuote";
 
 export default function App() {
 
@@ -61,9 +62,9 @@ export default function App() {
 
   return ( 
     <StyledEngineProvider injectFirst>
-      <Box sx={{ border: 3, padding: 5, minHeight: 400 }} >
+      <Box sx={{ border: 3, margin: 1, padding: 5 }} >
       {error ? <Alert severity="error">{error}</Alert> : null}
-      How much might a Heat Pump cost me?
+      <h2>How much might a Heat Pump cost me?</h2>
       {
       // If budget is not yet known, this is the start - collect input 
       (!budget)
@@ -74,17 +75,22 @@ export default function App() {
           {/* Once budget is present show report */}
           { (budget)
           ?
+          <>
             <ASHPBudgetReport 
               budget={budget}
             />
-
+           
+          </>
           : <Alert severity="error">Could not display budget report for this input</Alert>}
+          <Button onClick={()=> resetInput()}>Restart</Button>
+          <Button onClick={()=> resetOutput()}>Recalculate</Button>
         </>
       }
+
       </Box>
-      <Box sx={{ border: 3, padding: 5, minHeight: 400 }} >
+      <Box sx={{ border: 3, margin: 1, padding: 5 }} >
       {error ? <Alert severity="error">{error}</Alert> : null}
-      Is my heating system Heat Pump ready?
+      <h2>Is my heating system Heat Pump ready?</h2>
       {
       // If advice is not yet known, this is the start - collect input 
       (!HPReadyAdvice)
@@ -98,13 +104,14 @@ export default function App() {
             <HPReadyReport 
               advice={HPReadyAdvice}
             />
-
           : <Alert severity="error">Could not display budget report for this input</Alert>}
         </>
       }
       </Box>
-      <Button onClick={()=> resetInput()}>Restart</Button>
-      <Button onClick={()=> resetOutput()}>Recalculate</Button>
+
+      <Box sx={{ border: 3, margin: 1, padding: 5 }}>
+      { (budget && <HPTypicalQuote budget={budget}></HPTypicalQuote> )}
+      </Box>
     </StyledEngineProvider> 
   ); 
 }
