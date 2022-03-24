@@ -1,13 +1,14 @@
 import './App.css';
 import React from "react";
 import HeatPumpAdvice from './HeatPumpAdvice';
+import Header from './Header';
 
 
 export default function App() {
 
   return ( 
     <>
-    <h2>Home Heating Advice</h2>
+    <Header />
     <HeatPumpAdvice />
     </>
   ); 

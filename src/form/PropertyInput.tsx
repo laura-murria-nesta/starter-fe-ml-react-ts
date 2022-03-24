@@ -1,3 +1,4 @@
+import { Button } from "@mui/material";
 import { Field, Form, Formik } from "formik";
 import React from "react";
 import { PremisesInfo } from "../data";
@@ -70,11 +71,11 @@ export function PropertyInput(props: PropertyInputProps) {
             <Field name="floorArea" />
         </div>
 
-        <button
+        <Button
             onClick={() => onSubmit(premisesInfo)}
         >
             See my total
-        </button>
+        </Button>
         </Form>
           );
         }}   

@@ -29,37 +29,37 @@ export function HPTypicalQuote(props: { budget: ASHPBudget }) {
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
               <TableCell component="th" scope="row">Heat pump unit</TableCell>
-              <TableCell align="right"></TableCell>
+              <TableCell align="left"></TableCell>
               <TableCell align="right"></TableCell>
             </TableRow>
             <TableRow>
               <TableCell component="th" scope="row">Hot water cylinder</TableCell>
-              <TableCell align="right"></TableCell>
+              <TableCell align="left"></TableCell>
               <TableCell align="right"></TableCell>
             </TableRow>
             <TableRow>
               <TableCell component="th" scope="row">Design, survey, overheads</TableCell>
-              <TableCell align="right"></TableCell>
+              <TableCell align="left"></TableCell>
               <TableCell align="right"></TableCell>
             </TableRow>
             <TableRow>
               <TableCell component="th" scope="row">Plumbing materials</TableCell>
-              <TableCell align="right"></TableCell>
+              <TableCell align="left"></TableCell>
               <TableCell align="right"></TableCell>
             </TableRow>
             <TableRow>
               <TableCell component="th" scope="row">Electrical materials</TableCell>
-              <TableCell align="right"></TableCell>
+              <TableCell align="left"></TableCell>
               <TableCell align="right"></TableCell>
             </TableRow>
             <TableRow>
               <TableCell component="th" scope="row">Labour (plumbing, electrical)</TableCell>
-              <TableCell align="right"></TableCell>
+              <TableCell align="left"></TableCell>
               <TableCell align="right"></TableCell>
             </TableRow>
             <TableRow>
               <TableCell component="th" scope="row">Total</TableCell>
-              <TableCell align="right"></TableCell>
+              <TableCell align="left"></TableCell>
               <TableCell align="right"></TableCell>
             </TableRow>
         </TableBody>
@@ -78,27 +78,32 @@ export function HPTypicalQuote(props: { budget: ASHPBudget }) {
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
               <TableCell component="th" scope="row">Additional extras</TableCell>
-              <TableCell align="right"></TableCell>
+              <TableCell align="left"></TableCell>
               <TableCell align="right"></TableCell>
             </TableRow>
             <TableRow>
               <TableCell component="th" scope="row">Heating system upgrades</TableCell>
-              <TableCell align="right"></TableCell>
+              <TableCell align="left"></TableCell>
               <TableCell align="right"></TableCell>
             </TableRow>
             <TableRow>
               <TableCell component="th" scope="row">Building fabric energy efficiency upgrades</TableCell>
-              <TableCell align="right"></TableCell>
+              <TableCell align="left"></TableCell>
               <TableCell align="right"></TableCell>
             </TableRow>
             <TableRow>
               <TableCell component="th" scope="row">Interior carpentry/redecoration</TableCell>
-              <TableCell align="right"></TableCell>
+              <TableCell align="left"></TableCell>
               <TableCell align="right"></TableCell>
             </TableRow>
             <TableRow>
               <TableCell component="th" scope="row">Non-standard exterior works</TableCell>
+              <TableCell align="left"></TableCell>
               <TableCell align="right"></TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell component="th" scope="row">Buffer tank</TableCell>
+              <TableCell align="left"></TableCell>
               <TableCell align="right"></TableCell>
             </TableRow>
         </TableBody>
