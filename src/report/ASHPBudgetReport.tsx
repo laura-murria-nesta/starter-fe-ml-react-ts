@@ -1,6 +1,6 @@
 import { Slider } from "@mui/material";
-import { ASHPBudget } from "./budget";
-import { formatter } from "./util";
+import { ASHPBudget } from "../budget";
+import { formatter } from "../util";
 
 export function ASHPBudgetReport(props: { budget: ASHPBudget }) {
 

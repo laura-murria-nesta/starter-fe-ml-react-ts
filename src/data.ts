@@ -1,11 +1,23 @@
 export type ExistingHeatingInfo = {
+    isGasBoiler: string
     isCombiBoiler: string,
     isHWCylinder: string,
     boilerControls: BoilerControls,
+    isRadiators: string,
+    typicalRadiatorType: RadiatorType,
 }
 
 export type EPC = {
     id: number
+}
+
+export enum RadiatorType {
+    singlePanel = 'Single Panel',
+    doublePanel = 'Double Panel',
+    doubleWithFins = 'Double With Fins',
+    k1 = 'K1',
+    k2 = 'K2',
+    k3 = 'K3',
 }
 
 export enum BoilerControls {
