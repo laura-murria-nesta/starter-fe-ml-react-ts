@@ -19,7 +19,7 @@ return (
 		>
 		  <MenuIcon />
 		</IconButton>
-        <img src="./images/Nesta_Logo_White_RGB.png" alt="Nesta Logo" height={50}/>
+        <img src="/images/Nesta_Logo_White_RGB.png" alt="Nesta Logo" height={50}/>
 		<Typography variant="h6"
 			component="div" sx={{ flexGrow: 1 }}>
 			Home Heating Advice
