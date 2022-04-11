@@ -4,8 +4,6 @@ import React from "react";
 import { EPC, PremisesInfo, Region } from "../data";
 
 export type PropertyInputProps = {
-    premisesInfo: PremisesInfo,
-    epc: EPC,
     onSubmit: any,
 }
 
@@ -15,9 +13,9 @@ export interface PropertyInputFormValues {
   epc: EPC,
 }
 
-export function PropertyInput(props: PropertyInputProps) {
-  const { onSubmit, premisesInfo, epc } = props;
-  const initialValues: PropertyInputFormValues = { premisesInfo, epc, region: Region.Scotland } ;
+export function PropertyInput(props: PropertyInputProps & PropertyInputFormValues) {
+  const { onSubmit, premisesInfo, epc, region } = props;
+  const initialValues: PropertyInputFormValues = { premisesInfo, epc, region } ;
   return (
     <Formik
     initialValues={{...initialValues}}

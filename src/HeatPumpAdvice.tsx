@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Alert, Box, Button,StyledEngineProvider } from '@mui/material';
 
-import {  EPC, ExistingHeatingInfo, PremisesInfo } from './data';
+import {  EPC, ExistingHeatingInfo, PremiseAge, PremisesInfo, PremiseType, Region } from './data';
 import { InputParams, predict } from './model';
 
 import './App.css';
@@ -17,7 +17,8 @@ import { HPTypicalQuote } from "./report/HPTypicalQuote";
 export default function App() {
 
   const [ budget, setBudget ] = useState(null as ASHPBudget | null );
-  const [ premisesInfo, setPremisesInfo ] = useState({} as PremisesInfo);
+  const [ region, setRegion ] = useState(Region.Scotland);
+  const [ premisesInfo, setPremisesInfo ] = useState({ floorArea: 0, numRooms: 0 , age: PremiseAge.Band1, type: PremiseType.SemiDetached } as PremisesInfo);
   const [ epc, setEPC ] = useState({ energyPerformance: { wall: 0, floor: 0, window: 0, mainHeating: 0, hotWater: 0 }} as EPC);
   const [ error, setError ] = useState(null as string | null);
   const [ existingHeatingInfo, setExistingHeatingInfo ] = useState({} as ExistingHeatingInfo);
@@ -28,6 +29,7 @@ export default function App() {
       console.log(`Handling propertyInput: ${JSON.stringify(propertyInput)}`);
       setPremisesInfo(propertyInput.premisesInfo);
       setEPC(propertyInput.epc)
+      setRegion(propertyInput.region)
       const result = predict({ ...propertyInput, existingHeatingInfo } as InputParams);
       const budget = generateASHPBudget(result);
       setBudget(budget);
@@ -58,9 +60,10 @@ export default function App() {
 
   const resetInput = () => {
     setError(null);
-    setPremisesInfo({} as PremisesInfo);
+    setPremisesInfo({ floorArea: 0, numRooms: 0 , age: PremiseAge.Band1, type: PremiseType.SemiDetached } as PremisesInfo);
     setEPC({ energyPerformance: { wall: 0, floor: 0, window: 0, mainHeating: 0, hotWater: 0 }} as EPC);
     setExistingHeatingInfo({} as ExistingHeatingInfo);
+    setRegion(Region.Scotland);
     resetOutput();
   };
 
@@ -73,7 +76,7 @@ export default function App() {
       // If budget is not yet known, this is the start - collect input 
       (!budget)
         ?
-        <PropertyInput premisesInfo={premisesInfo} epc={epc} onSubmit={handleSubmitPropertyInput} />
+        <PropertyInput region={region} premisesInfo={premisesInfo} epc={epc} onSubmit={handleSubmitPropertyInput} />
         : 
         <>
           {/* Once budget is present show report */}
