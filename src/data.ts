@@ -23,8 +23,8 @@ export type PropertyFeaturesEnergyPerformance = {
     floor: EPCEnergyPerfRating[],
     hotWater:  EPCEnergyPerfRating[],
     mainHeating: EPCEnergyPerfRating[],
-    mainHeatingControl: EPCEnergyPerfRating[],
-    secondaryHeating: EPCEnergyPerfRating[],
+    mainHeatingControl: EPCEnergyPerfRating[] | null,
+    secondaryHeating: EPCEnergyPerfRating[] | null,
 }
 
 export type EPC = {

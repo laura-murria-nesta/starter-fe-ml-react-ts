@@ -25,6 +25,7 @@ export default function App() {
 
   const handleSubmitPropertyInput = (propertyInput: PropertyInputFormValues) => {
     try { 
+      console.log(`Handling propertyInput: ${JSON.stringify(propertyInput)}`);
       setPremisesInfo(propertyInput.premisesInfo);
       setEPC(propertyInput.epc)
       const result = predict({ ...propertyInput, existingHeatingInfo } as InputParams);
