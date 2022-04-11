@@ -4,8 +4,8 @@ import { Alert, Box, Button,StyledEngineProvider } from '@mui/material';
 import {  EPC, ExistingHeatingInfo, PremiseAge, PremisesInfo, PremiseType, Region } from './data';
 import { InputParams, predict } from './model';
 
-import './App.css';
-import './form.css';
+// import './App.css';
+// import './form.css';
 import { ASHPBudget, generateASHPBudget } from "./budget";
 import { ASHPBudgetReport } from "./report/ASHPBudgetReport";
 import { PropertyInput, PropertyInputFormValues } from "./form/PropertyInput";
@@ -89,8 +89,8 @@ export default function App() {
            
           </>
           : <Alert severity="error">Could not display budget report for this input</Alert>}
-          <Button onClick={()=> resetInput()}>Restart</Button>
-          <Button onClick={()=> resetOutput()}>Recalculate</Button>
+          <Button variant="contained" color="primary"  onClick={()=> resetInput()}>Restart</Button>
+          <Button variant="contained" color="primary"  onClick={()=> resetOutput()}>Recalculate</Button>
         </>
       }
 

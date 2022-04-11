@@ -1,4 +1,4 @@
-import { Grid } from "@mui/material";
+import { Button, Grid } from "@mui/material";
 import { Field, Form, Formik } from "formik";
 import React from "react";
 import { BoilerControls, ExistingHeatingInfo } from "../data";
@@ -88,11 +88,11 @@ export function HeatingSystemInput(props: HeatingSystemInputProps) {
                 </div>
             </Grid>
             <Grid item xs={12} sm={6}>
-            <button
+            <Button variant="contained" color="primary" 
                 onClick={() => onSubmit(existingHeatingInfo)}
             >
                 Submit
-            </button>
+            </Button>
             </Grid>
         </Grid>
         </Form>

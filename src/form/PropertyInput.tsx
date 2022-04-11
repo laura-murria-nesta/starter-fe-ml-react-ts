@@ -186,7 +186,7 @@ export function PropertyInput(props: PropertyInputProps & PropertyInputFormValue
             </Field>
           </Grid>
         </Grid>
-        <Button type="submit">
+        <Button variant="contained" color="primary"  type="submit">
             Submit
         </Button>
         </Form>

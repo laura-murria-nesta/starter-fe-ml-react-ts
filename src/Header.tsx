@@ -24,7 +24,7 @@ return (
 			component="div" sx={{ flexGrow: 1 }}>
 			Home Heating Advice
 		</Typography>
-		<Button color="inherit">Login</Button>
+		<Button variant="contained" color="primary">Login</Button>
 		</Toolbar>
 	</AppBar>
 );
