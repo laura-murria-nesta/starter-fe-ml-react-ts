@@ -82,7 +82,7 @@ export function PropertyInput(props: PropertyInputProps & PropertyInputFormValue
               <label
               htmlFor="num-rooms-label"
               >
-              How many bedrooms and living rooms are there in total?
+              How many bedrooms and living rooms?
               </label>
           </Grid>
           <Grid item xs={4}>
@@ -92,14 +92,14 @@ export function PropertyInput(props: PropertyInputProps & PropertyInputFormValue
               <label
               htmlFor="floor-area-label"
               >
-              Floor area in sq m (approx)?
+              Floor area (approx)
               </label>
           </Grid>
           <Grid item xs={4}>
-              <Field name="premisesInfo.floorArea" />
+              <Field name="premisesInfo.floorArea" />&nbsp;m<sup>2</sup>
           </Grid>
           <Grid item xs={12}>
-            Building energy performance
+            Building energy performance (from your EPC)
           </Grid>
           <Grid item xs={6}>
             <label htmlFor="epc-label-wall">Wall</label>
