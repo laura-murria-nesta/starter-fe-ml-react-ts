@@ -7,29 +7,8 @@ export type ExistingHeatingInfo = {
     typicalRadiatorType: RadiatorType,
 }
 
-export enum EPCEnergyPerfRating {
-   'very good (most efficient)'  = 1,
-   'good' = 2,
-   'average' = 3,
-   'poor' = 4,
-   'very poor (least efficient)' = 5,
-   'N/A' = 0,
-}
-
-export type PropertyFeaturesEnergyPerformance = {
-    wall: EPCEnergyPerfRating[],
-    roof: EPCEnergyPerfRating[],
-    window: EPCEnergyPerfRating[],
-    floor: EPCEnergyPerfRating[],
-    hotWater:  EPCEnergyPerfRating[],
-    mainHeating: EPCEnergyPerfRating[],
-    mainHeatingControl: EPCEnergyPerfRating[],
-    secondaryHeating: EPCEnergyPerfRating[],
-}
-
 export type EPC = {
     id: number
-    energyPerformance: PropertyFeaturesEnergyPerformance,
 }
 
 export enum RadiatorType {

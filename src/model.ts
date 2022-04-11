@@ -3,7 +3,7 @@ import { EPC, ExistingHeatingInfo, PremisesInfo } from "./data";
 export type InputParams = {
     existingHeatingInfo: ExistingHeatingInfo,
     premisesInfo: PremisesInfo,
-    epc: EPC | null,
+    EPC: EPC | null,
 }
 
 export type Result = {
