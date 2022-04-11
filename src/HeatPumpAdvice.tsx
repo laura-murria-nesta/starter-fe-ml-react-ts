@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Alert, Box, Button,StyledEngineProvider } from '@mui/material';
+import { Alert, Box, Button,Grid,StyledEngineProvider } from '@mui/material';
 
 import {  EPC, ExistingHeatingInfo, PremiseAge, PremisesInfo, PremiseType, Region } from './data';
 import { InputParams, predict } from './model';
@@ -67,8 +67,8 @@ export default function App() {
     resetOutput();
   };
 
-  return ( 
-    <StyledEngineProvider injectFirst>
+  return (
+    <>
       <Box sx={{ border: 3, margin: 1, padding: 5 }} >
       {error ? <Alert severity="error">{error}</Alert> : null}
       <h2>How much might a Heat Pump cost me?</h2>
@@ -78,24 +78,28 @@ export default function App() {
         ?
         <PropertyInput region={region} premisesInfo={premisesInfo} epc={epc} onSubmit={handleSubmitPropertyInput} />
         : 
-        <>
+        <Grid container spacing={2}  >
           {/* Once budget is present show report */}
+          <Grid item xs={12}>
           { (budget)
           ?
-          <>
+
             <ASHPBudgetReport 
               budget={budget}
             />
-           
-          </>
           : <Alert severity="error">Could not display budget report for this input</Alert>}
+          </Grid>
+          <Grid item xs={6}>
           <Button variant="contained" color="primary"  onClick={()=> resetInput()}>Restart</Button>
+          </Grid>
+          <Grid item xs={6}>
           <Button variant="contained" color="primary"  onClick={()=> resetOutput()}>Recalculate</Button>
-        </>
+          </Grid>
+        </Grid>
       }
-
       </Box>
-      <Box sx={{ border: 3, margin: 1, padding: 5 }} >
+
+      {/* <Box sx={{ border: 3, margin: 1, padding: 5 }} >
       {error ? <Alert severity="error">{error}</Alert> : null}
       <h2>Is my heating system Heat Pump ready?</h2>
       {
@@ -105,7 +109,7 @@ export default function App() {
         <HeatingSystemInput existingHeatingInfo={existingHeatingInfo} onSubmit={handleSubmitExistingHeatingInfo} />
         : 
         <>
-          {/* Once advice is present show */}
+      
           { (HPReadyAdvice)
           ?
             <HPReadyReport 
@@ -114,12 +118,12 @@ export default function App() {
           : <Alert severity="error">Could not display budget report for this input</Alert>}
         </>
       }
-      </Box>
+      </Box> */}
 
-      <Box sx={{ border: 3, margin: 1, padding: 5 }}>
-      { (budget && <HPTypicalQuote budget={budget}></HPTypicalQuote> )}
-      </Box>
-    </StyledEngineProvider> 
+      {/* // <Box sx={{ border: 3, margin: 1, padding: 5 }}>
+      // { (budget && <HPTypicalQuote budget={budget}></HPTypicalQuote> )}
+      // </Box> */}
+      </>
   ); 
 }
 
