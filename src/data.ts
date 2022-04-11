@@ -8,23 +8,24 @@ export type ExistingHeatingInfo = {
 }
 
 export enum EPCEnergyPerfRating {
-   'very good (most efficient)'  = 1,
+   ' ' = 0,
+   'very good'  = 1,
    'good' = 2,
    'average' = 3,
    'poor' = 4,
-   'very poor (least efficient)' = 5,
-   'N/A' = 0,
+   'very poor' = 5,
+   'N/A' = 6,
 }
 
 export type PropertyFeaturesEnergyPerformance = {
-    wall: EPCEnergyPerfRating[],
-    roof: EPCEnergyPerfRating[],
-    window: EPCEnergyPerfRating[],
-    floor: EPCEnergyPerfRating[],
-    hotWater:  EPCEnergyPerfRating[],
-    mainHeating: EPCEnergyPerfRating[],
-    mainHeatingControl: EPCEnergyPerfRating[] | null,
-    secondaryHeating: EPCEnergyPerfRating[] | null,
+    wall: EPCEnergyPerfRating,
+    roof: EPCEnergyPerfRating,
+    window: EPCEnergyPerfRating,
+    floor: EPCEnergyPerfRating,
+    hotWater:  EPCEnergyPerfRating,
+    mainHeating: EPCEnergyPerfRating,
+    mainHeatingControl: EPCEnergyPerfRating | null,
+    secondaryHeating: EPCEnergyPerfRating | null,
 }
 
 export type EPC = {
@@ -104,4 +105,12 @@ export type Property = {
     epc: EPC | null,
     owner: Customer | null,
     mpan: string | null,
+}
+
+export enum Region {
+    Scotland = 'Scotland',
+    Wales = 'Wales',
+    NorthernEngland = 'Northern England',
+    Midlands = 'Midlands',
+    SouthernEngland = 'Southern England',
 }

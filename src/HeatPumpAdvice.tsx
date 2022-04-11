@@ -18,7 +18,7 @@ export default function App() {
 
   const [ budget, setBudget ] = useState(null as ASHPBudget | null );
   const [ premisesInfo, setPremisesInfo ] = useState({} as PremisesInfo);
-  const [ epc, setEPC ] = useState({} as EPC);
+  const [ epc, setEPC ] = useState({ energyPerformance: { wall: 0, floor: 0, window: 0, mainHeating: 0, hotWater: 0 }} as EPC);
   const [ error, setError ] = useState(null as string | null);
   const [ existingHeatingInfo, setExistingHeatingInfo ] = useState({} as ExistingHeatingInfo);
   const [ HPReadyAdvice, setHPReadyAdvice ] = useState (null as HPReadyAdvice | null );
@@ -59,7 +59,7 @@ export default function App() {
   const resetInput = () => {
     setError(null);
     setPremisesInfo({} as PremisesInfo);
-    setEPC({} as EPC);
+    setEPC({ energyPerformance: { wall: 0, floor: 0, window: 0, mainHeating: 0, hotWater: 0 }} as EPC);
     setExistingHeatingInfo({} as ExistingHeatingInfo);
     resetOutput();
   };
