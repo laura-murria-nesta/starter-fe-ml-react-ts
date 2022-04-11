@@ -1,23 +1,28 @@
-import { Button } from "@mui/material";
+import { Button, Grid } from "@mui/material";
 import { Field, Form, Formik } from "formik";
 import React from "react";
-import { PremisesInfo } from "../data";
+import { EPC, PremisesInfo } from "../data";
 
 export type PropertyInputProps = {
     premisesInfo: PremisesInfo,
+    epc: EPC,
     onSubmit: any,
 }
 
+export interface PropertyInputFormValues {
+  premisesInfo: PremisesInfo,
+  epc: EPC,
+}
 
 export function PropertyInput(props: PropertyInputProps) {
-  const { onSubmit, premisesInfo } = props;
-
+  const { onSubmit, premisesInfo, epc } = props;
+  const initialValues: PropertyInputFormValues = { premisesInfo, epc } ;
   return (
     <Formik
-    initialValues={{...premisesInfo}}
+    initialValues={{...initialValues}}
     onSubmit={async (values) => {
         onSubmit(
-          values as PremisesInfo);
+          values as PropertyInputFormValues);
     }}
     >
     {({ values }) => {
@@ -69,6 +74,51 @@ export function PropertyInput(props: PropertyInputProps) {
             Floor area in sq m (approx)?
             </label>
             <Field name="floorArea" />
+        </div>
+
+        <div className="mb-5">
+        <Grid container spacing={2}>
+          <Grid item xs={8}>
+          Building energy performance
+          </Grid>
+          <Grid item xs={4}>
+            <label htmlFor="epc-label-wall">Wall</label>
+          </Grid>
+          <Grid item xs={4}>  
+            <Field as="select" name="epc.energyperformance.wall" >
+              <option value={1}>Very good (most efficient)</option>
+              <option value={2}>Good</option>
+              <option value={3}>Average</option>
+              <option value={4}>Poor</option>
+              <option value={5}>Very poor</option>
+              <option value={0}>N/A</option>
+            </Field>
+          </Grid>
+          <Grid item xs={4}>
+            <label htmlFor="epc-label-roof">Roof</label>
+          </Grid>
+          <Grid item xs={4}>  
+            <Field as="select" name="epc.energyperformance.roof" >
+              <option value={1}>Very good (most efficient)</option>
+              <option value={2}>Good</option>
+              <option value={3}>Average</option>
+              <option value={4}>Poor</option>
+              <option value={5}>Very poor</option>
+              <option value={0}>N/A</option>
+            </Field>
+          </Grid>
+
+
+        </Grid>
+
+            {/* wall: EPCEnergyPerfRating[],
+    roof: EPCEnergyPerfRating[],
+    window: EPCEnergyPerfRating[],
+    floor: EPCEnergyPerfRating[],
+    hotWater:  EPCEnergyPerfRating[],
+    mainHeating: EPCEnergyPerfRating[],
+    mainHeatingControl: EPCEnergyPerfRating[],
+    secondaryHeating: EPCEnergyPerfRating[], */}
         </div>
 
         <Button
