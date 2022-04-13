@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Alert, Box, Button, Grid } from '@mui/material';
 
-import {  EPC, EPCEnergyPerfRatings, ExistingHeatingInfo, PremiseAge, PremisesInfo, PremiseType, Region } from './data';
+import {  EPC, EPCEnergyPerfRatings, ExistingHeatingInfo, PremiseAges, PremisesInfo, PremiseTypes, } from './data';
 import { InputParams, predict } from './model';
 
 
@@ -14,8 +14,8 @@ export default function App() {
   const noRatingSet =  EPCEnergyPerfRatings.find(element => element.key === 'NOT_SET')?.value.toString();
 
   const [ budget, setBudget ] = useState(null as ASHPBudget | null );
-  const [ region, setRegion ] = useState(Region.Scotland);
-  const [ premisesInfo, setPremisesInfo ] = useState({ floorArea: 0, numRooms: 0 , age: PremiseAge.Band1, type: PremiseType.SemiDetached } as PremisesInfo);
+  const [ region, setRegion ] = useState('Scotland');
+  const [ premisesInfo, setPremisesInfo ] = useState({ floorArea: 0, numRooms: 0 , age: PremiseAges[0]?.key, type: PremiseTypes[0]?.key } as PremisesInfo);
   const [ epc, setEPC ] = useState({ id: null, energyPerformance: { wall: noRatingSet,  window: noRatingSet, roof: noRatingSet }} as EPC);
   const [ error, setError ] = useState(null as string | null);
   const [ existingHeatingInfo, setExistingHeatingInfo ] = useState({} as ExistingHeatingInfo);
@@ -58,7 +58,7 @@ export default function App() {
   const resetInput = () => {
     
     setError(null);
-    setPremisesInfo({ floorArea: 0, numRooms: 0 , age: PremiseAge.Band1, type: PremiseType.SemiDetached } as PremisesInfo);
+    setPremisesInfo({ floorArea: 0, numRooms: 0 , age: PremiseAges[0]?.key, type: PremiseTypes[0]?.key } as PremisesInfo);
     setEPC({ 
       id: null, 
       energyPerformance: { 
@@ -67,7 +67,7 @@ export default function App() {
         window: noRatingSet
       } } as EPC);
     setExistingHeatingInfo({} as ExistingHeatingInfo);
-    setRegion(Region.Scotland);
+    setRegion('Scotland');
     resetOutput();
   };
 

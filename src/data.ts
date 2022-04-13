@@ -7,12 +7,12 @@ export type ExistingHeatingInfo = {
     typicalRadiatorType: RadiatorType,
 }
 
-export type EPCEnergyPerfRating = {
+export type Lookup = {
     key: string,
     value: number,
     label: string,
 }
-export const EPCEnergyPerfRatings: EPCEnergyPerfRating[] =  [
+export const EPCEnergyPerfRatings: Lookup[] =  [
     { key: 'NOT_SET', value: 0, label: '--Please select --' },
     { key: 'VERY_POOR', value: 1, label: 'Very Poor' },
     { key: 'POOR', value: 2, label: 'Poor' },
@@ -26,11 +26,11 @@ export type PropertyFeaturesEnergyPerformance = {
     wall: string,
     roof: string,
     window: string,
-    floor?: EPCEnergyPerfRating,
-    hotWater?:  EPCEnergyPerfRating,
-    mainHeating?: EPCEnergyPerfRating,
-    mainHeatingControl?: EPCEnergyPerfRating,
-    secondaryHeating?: EPCEnergyPerfRating,
+    floor?: string,
+    hotWater?:  string,
+    mainHeating?: string,
+    mainHeatingControl?: string,
+    secondaryHeating?: string,
 }
 
 // null id indicates customer provided values not formal EPC values
@@ -55,31 +55,23 @@ export enum BoilerControls {
     unknown = 'Unknown',
     inaccessible = 'Inaccessible'
 }
-
-export enum NumRooms {
-    small = '1-2 rooms',
-    medium = '3-4 rooms',
-    large = '5-6 rooms',
-    huge = '7-9 rooms',
-    palatial = '10+ rooms'
-    }
     
-export enum PremiseType {
-    Detached = "Detached",
-    SemiDetached = "Semi-Detached",
-    MidTerraced = "Mid-Terraced",
-    EndTerraced = "End-Terraced",
-    Bungalow = "Bungalow",
-    Flat = "Flat",
-}
-    
-export enum PremiseAge {
-    Band1 = 'Pre 1900',
-    Band2 = '1900-1950',
-    Band3 = '1950-1975',
-    Band4 = '1976-1990',
-    Band5 = 'Post 1990',
-}
+export const PremiseTypes: Lookup[] = [
+    { key: 'Detached', value: 1, label: "Detached" },
+    { key: 'SemiDetached', value: 1, label: "Semi-Detached"},
+    { key: 'MidTerraced', value: 1, label: "Mid-Terraced"},
+    { key: 'EndTerraced', value: 1, label: "End-Terraced"},
+    { key: 'Bungalow', value: 1, label: "Bungalow"},
+    { key: 'Flat', value: 1, label: "Flat"},
+]
+   
+export const PremiseAges: Lookup[] =  [
+    { key: 'Not set', value: 0, label: '--Please select --' },
+    { key: 'Pre 1930', value: 1, label: 'Pre 1930' },
+    { key: '1930-1965', value: 2, label: '1930-1965' },
+    { key: '1966-1983', value: 3, label: '1966-1983' },
+    { key: 'Post 1983', value: 4, label: 'Post 1983' },
+]
     
 export type PremisesInfo = {
     type: string,
@@ -113,10 +105,16 @@ export type Property = {
     mpan: string | null,
 }
 
-export enum Region {
-    Scotland = 'Scotland',
-    Wales = 'Wales',
-    NorthernEngland = 'Northern England',
-    Midlands = 'Midlands',
-    SouthernEngland = 'Southern England',
-}
+export const Regions = [
+ 'Scotland', 
+ 'North East', 
+ 'Yorkshire and The Humber',
+ 'North West', 
+ 'Wales',
+ 'West Midlands', 
+ 'East Midlands',
+ 'East of England',
+ 'London', 
+ 'South East', 
+ 'South West',
+]

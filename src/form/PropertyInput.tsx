@@ -2,15 +2,14 @@ import { Button, Grid } from "@mui/material";
 import { Field, Form, Formik } from "formik";
 import * as Yup from 'yup';
 import React from "react";
-import { EPC, EPCEnergyPerfRatings, PremiseAge, PremisesInfo, Region } from "../data";
-import { oneOfEnum } from "../util";
+import { EPC, EPCEnergyPerfRatings, PremiseAges, PremisesInfo, Regions } from "../data";
 
 export type PropertyInputProps = {
     onSubmit: any,
 }
 
 export interface PropertyInputFormValues {
-  region: Region,
+  region: string,
   premisesInfo: PremisesInfo,
   epc: EPC,
 }
@@ -27,14 +26,28 @@ const PropertyInputValidationSchema =
         .min(1, 'Area seems too small for a valid estimate')
         .max(500, 'Area seems large. Use m2 not ft2. We are unable to estimate very large properties')
         .required('Required'),
-      age: oneOfEnum(PremiseAge).required('Choose an age bracket'),
+      age: Yup.string().test(
+        'Age bracket required', 'Age bracket required', (value => value !== 'Not set')
+      ),
       type: Yup.string().required('Property type is required'),
     }),
     epc: Yup.object().shape({
       energyPerformance: Yup.object().shape({
-        wall: Yup.string(),
-        roof: Yup.string(),
-        window: Yup.string(),
+        wall: Yup.string().test(
+          'Please select', 
+          'Please select', 
+          (value => parseInt(value!, 10) > 0)
+        ),
+        roof: Yup.string().test(
+          'Please select', 
+          'Please select', 
+          (value => parseInt(value!, 10) > 0)
+        ),
+        window: Yup.string().test(
+          'Please select', 
+          'Please select', 
+          (value => parseInt(value!, 10) > 0)
+        ),
       }),
     }),
 });
@@ -65,19 +78,17 @@ export function PropertyInput(props: PropertyInputProps & PropertyInputFormValue
               {touched.region && errors.region && <div>{errors.region}</div>}
           </Grid>
           <Grid item xs={4}>
-              <Field as="select" name="region">    
-                  <option value={Region.Scotland}>Scotland</option>
-                  <option value={Region.Wales}>Wales</option>
-                  <option value={Region.NorthernEngland}>Northern England</option>
-                  <option value={Region.Midlands}>Midlands</option>
-                  <option value={Region.SouthernEngland}>Southern England</option>
+              <Field as="select" name="region">  
+              {Regions.map(item => (
+                <option key={`region-${item}`} value={item}>{item}</option>
+              ))} 
               </Field>
           </Grid>
           <Grid item xs={8}>
               <label
               htmlFor="type-label"
               >
-              What type of house is it?
+              What type of property is it?
               </label>
               {touched.premisesInfo && touched.premisesInfo!.type && errors.premisesInfo && errors.premisesInfo!.type && <div>{errors.premisesInfo!.type}</div>}
           </Grid>
@@ -101,11 +112,9 @@ export function PropertyInput(props: PropertyInputProps & PropertyInputFormValue
           </Grid>
           <Grid item xs={4}>
               <Field as="select" name="premisesInfo.age"> 
-              <option value="Pre 1900">Pre 1900</option>
-              <option value="1900-1950" >1900-1950</option>
-              <option value="1950-1975">1950-1975</option>
-              <option value="1976-1990">1976-1990</option>
-              <option value="Post 1990">Post 1990</option>
+              {PremiseAges.map(item => (
+                <option key={`age-${item.key}`} value={item.key}>{item.label}</option>
+              ))} 
               </Field>
           </Grid>
           <Grid item xs={8}>
@@ -142,6 +151,7 @@ export function PropertyInput(props: PropertyInputProps & PropertyInputFormValue
               <option key={`wall-${item.value}`} value={item.value}>{item.label}</option>
             ))}
             </Field>
+            {touched.epc && touched.epc!.energyPerformance && errors.epc && errors.epc!.energyPerformance && <div>{errors.epc!.energyPerformance.wall}</div>}
           </Grid>
           <Grid item xs={6}>
             <label htmlFor="epc-label-roof">Roof</label>
@@ -152,16 +162,18 @@ export function PropertyInput(props: PropertyInputProps & PropertyInputFormValue
               <option key={`roof-${item.value}`} value={item.value}>{item.label}</option>
             ))}
             </Field>
+            {touched.epc && touched.epc!.energyPerformance && errors.epc && errors.epc!.energyPerformance && <div>{errors.epc!.energyPerformance.roof}</div>}
           </Grid>
           <Grid item xs={6}>
-            <label htmlFor="epc-label-roof">Window</label>
+            <label htmlFor="epc-label-window">Window</label>
+            {touched.epc && touched.epc!.energyPerformance && errors.epc && errors.epc!.energyPerformance && <div>{errors.epc!.energyPerformance.window}</div>}
           </Grid>
           <Grid item xs={6}>  
             <Field as="select" name="epc.energyPerformance.window" >
               {EPCEnergyPerfRatings.map(item => (
                 <option key={`window-${item.value}`} value={item.value}>{item.label}</option>
               ))}
-            </Field>
+            </Field> 
           </Grid>
           <Grid item xs={12}>
           <Button variant="contained" color="primary"  type="submit">
