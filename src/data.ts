@@ -9,11 +9,11 @@ export type ExistingHeatingInfo = {
 
 export enum EPCEnergyPerfRating {
    ' ' = 0,
-   'very good'  = 1,
-   'good' = 2,
+   'very good'  = 5,
+   'good' = 4,
    'average' = 3,
-   'poor' = 4,
-   'very poor' = 5,
+   'poor' = 2,
+   'very poor' = 1,
    'N/A' = 6,
 }
 
@@ -21,9 +21,9 @@ export type PropertyFeaturesEnergyPerformance = {
     wall: EPCEnergyPerfRating,
     roof: EPCEnergyPerfRating,
     window: EPCEnergyPerfRating,
-    floor: EPCEnergyPerfRating,
-    hotWater:  EPCEnergyPerfRating,
-    mainHeating: EPCEnergyPerfRating,
+    floor: EPCEnergyPerfRating | null,
+    hotWater:  EPCEnergyPerfRating| null,
+    mainHeating: EPCEnergyPerfRating | null,
     mainHeatingControl: EPCEnergyPerfRating | null,
     secondaryHeating: EPCEnergyPerfRating | null,
 }

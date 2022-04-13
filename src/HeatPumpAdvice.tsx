@@ -1,18 +1,13 @@
 import { useState } from "react";
-import { Alert, Box, Button,Grid,StyledEngineProvider } from '@mui/material';
+import { Alert, Box, Button, Grid } from '@mui/material';
 
 import {  EPC, ExistingHeatingInfo, PremiseAge, PremisesInfo, PremiseType, Region } from './data';
 import { InputParams, predict } from './model';
 
-// import './App.css';
-// import './form.css';
+
 import { ASHPBudget, generateASHPBudget } from "./budget";
 import { ASHPBudgetReport } from "./report/ASHPBudgetReport";
 import { PropertyInput, PropertyInputFormValues } from "./form/PropertyInput";
-import { advise, HPReadyAdvice } from "./adviseHPReady";
-import { HeatingSystemInput } from "./form/HeatingSystemInput";
-import { HPReadyReport } from "./report/HPReadyReport";
-import { HPTypicalQuote } from "./report/HPTypicalQuote";
 
 export default function App() {
 
@@ -22,7 +17,7 @@ export default function App() {
   const [ epc, setEPC ] = useState({ energyPerformance: { wall: 0, floor: 0, window: 0, mainHeating: 0, hotWater: 0 }} as EPC);
   const [ error, setError ] = useState(null as string | null);
   const [ existingHeatingInfo, setExistingHeatingInfo ] = useState({} as ExistingHeatingInfo);
-  const [ HPReadyAdvice, setHPReadyAdvice ] = useState (null as HPReadyAdvice | null );
+  // const [ HPReadyAdvice, setHPReadyAdvice ] = useState (null as HPReadyAdvice | null );
 
   const handleSubmitPropertyInput = (propertyInput: PropertyInputFormValues) => {
     try { 
@@ -40,22 +35,22 @@ export default function App() {
     }
   }
 
-  const handleSubmitExistingHeatingInfo = (heatingInfo: ExistingHeatingInfo) => {
-    try { 
-      setExistingHeatingInfo(heatingInfo);
-      const adviceCode = advise({ existingHeatingInfo } as InputParams);
-      setHPReadyAdvice(adviceCode);
-    } catch (error) {
-      const errMess = `Unable to estimate heat pump costs for this property at this time: ${error}`;
-      console.log(errMess);
-      setError(errMess);
-    }
-  }
+  // const handleSubmitExistingHeatingInfo = (heatingInfo: ExistingHeatingInfo) => {
+  //   try { 
+  //     setExistingHeatingInfo(heatingInfo);
+  //     const adviceCode = advise({ existingHeatingInfo } as InputParams);
+  //     setHPReadyAdvice(adviceCode);
+  //   } catch (error) {
+  //     const errMess = `Unable to estimate heat pump costs for this property at this time: ${error}`;
+  //     console.log(errMess);
+  //     setError(errMess);
+  //   }
+  // }
 
   const resetOutput = () => {
     setError(null);
     setBudget(null);
-    setHPReadyAdvice(null);
+    // setHPReadyAdvice(null);
   };
 
   const resetInput = () => {
