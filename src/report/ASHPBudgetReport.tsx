@@ -25,9 +25,6 @@ export function ASHPBudgetReport(props: { budget: ASHPBudget }) {
 
     return (
         <>
-        {/* <div>
-            {JSON.stringify(budget)}
-        </div> */}
         <br/>
         <br/>
         <br/>

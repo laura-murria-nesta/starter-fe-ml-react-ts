@@ -19,7 +19,6 @@ export default function App() {
   const [ epc, setEPC ] = useState({ id: null, energyPerformance: { wall: noRatingSet,  window: noRatingSet, roof: noRatingSet }} as EPC);
   const [ error, setError ] = useState(null as string | null);
   const [ existingHeatingInfo, setExistingHeatingInfo ] = useState({} as ExistingHeatingInfo);
-  // const [ HPReadyAdvice, setHPReadyAdvice ] = useState (null as HPReadyAdvice | null );
 
   const handleSubmitPropertyInput = (propertyInput: PropertyInputFormValues) => {
     try { 
@@ -37,22 +36,9 @@ export default function App() {
     }
   }
 
-  // const handleSubmitExistingHeatingInfo = (heatingInfo: ExistingHeatingInfo) => {
-  //   try { 
-  //     setExistingHeatingInfo(heatingInfo);
-  //     const adviceCode = advise({ existingHeatingInfo } as InputParams);
-  //     setHPReadyAdvice(adviceCode);
-  //   } catch (error) {
-  //     const errMess = `Unable to estimate heat pump costs for this property at this time: ${error}`;
-  //     console.log(errMess);
-  //     setError(errMess);
-  //   }
-  // }
-
   const resetOutput = () => {
     setError(null);
     setBudget(null);
-    // setHPReadyAdvice(null);
   };
 
   const resetInput = () => {
@@ -102,31 +88,6 @@ export default function App() {
         </Grid>
       }
       </Box>
-
-      {/* <Box sx={{ border: 3, margin: 1, padding: 5 }} >
-      {error ? <Alert severity="error">{error}</Alert> : null}
-      <h2>Is my heating system Heat Pump ready?</h2>
-      {
-      // If advice is not yet known, this is the start - collect input 
-      (!HPReadyAdvice)
-        ?
-        <HeatingSystemInput existingHeatingInfo={existingHeatingInfo} onSubmit={handleSubmitExistingHeatingInfo} />
-        : 
-        <>
-      
-          { (HPReadyAdvice)
-          ?
-            <HPReadyReport 
-              advice={HPReadyAdvice}
-            />
-          : <Alert severity="error">Could not display budget report for this input</Alert>}
-        </>
-      }
-      </Box> */}
-
-      {/* // <Box sx={{ border: 3, margin: 1, padding: 5 }}>
-      // { (budget && <HPTypicalQuote budget={budget}></HPTypicalQuote> )}
-      // </Box> */}
       </>
   ); 
 }

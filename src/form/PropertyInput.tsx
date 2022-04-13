@@ -67,7 +67,6 @@ export function PropertyInput(props: PropertyInputProps & PropertyInputFormValue
     {({ errors, touched, values }) => {
       return (
         <Form >
-          {JSON.stringify(values)}
         <Grid container spacing={2}>
           <Grid item xs={8}>
               <label
