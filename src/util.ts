@@ -8,5 +8,14 @@ export const formatter = new Intl.NumberFormat('en-UK', {
 
 export const oneOfEnum = <T>(enumObject: { [s: string]: T } | ArrayLike<T>) =>
   yup.mixed<T>().oneOf(Object.values(enumObject));
+
+  type EnumKeys<Enum> = Exclude<keyof Enum, number>
+
+export const enumObject = <Enum extends Record<string, number | string>>(e: Enum) => {
+      const copy = {...e} as { [K in EnumKeys<Enum>]: Enum[K] };
+      Object.values(e).forEach(value => typeof value === 'number' && delete copy[value]);
+      return copy;
+  };
+
   
  

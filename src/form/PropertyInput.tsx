@@ -2,7 +2,7 @@ import { Button, Grid } from "@mui/material";
 import { Field, Form, Formik } from "formik";
 import * as Yup from 'yup';
 import React from "react";
-import { EPC, PremiseAge, PremisesInfo, Region } from "../data";
+import { EPC, EPCEnergyPerfRating, PremiseAge, PremisesInfo, Region } from "../data";
 import { oneOfEnum } from "../util";
 
 export type PropertyInputProps = {
@@ -133,14 +133,30 @@ export function PropertyInput(props: PropertyInputProps & PropertyInputFormValue
             <label htmlFor="epc-label-wall">Wall</label>
           </Grid>
           <Grid item xs={6}>  
+          {/* {JSON.stringify(enumObject(EPCEnergyPerfRating))} */}
             <Field as="select" name="epc.energyPerformance.wall" >
-              <option value={0}>--Please select--</option>
+            {/* {Object.keys(EPCEnergyPerfRating).filter(value => typeof value === 'string').map(key => (
+              <option value={key}>{EPCEnergyPerfRating[key as any]}</option>
+            ))} */}
+            {/* {enumObject(EPCEnergyPerfRating).map(key) => (
+              <option value={key}>{key[key as any]}</option>
+            ))} */}
+            {Object.keys(EPCEnergyPerfRating)
+            //.filter(key => typeof key === 'string')
+            .map(key => (
+            <>
+              <div>{JSON.stringify(key)}</div>
+              <option value={key}>{EPCEnergyPerfRating[key as any]}</option>
+              </>
+            ))}
+
+              {/* <option value={0}>--Please select--</option>
               <option value={1}>Very good</option>
               <option value={2}>Good</option>
               <option value={3}>Average</option>
               <option value={4}>Poor</option>
               <option value={5}>Very poor</option>
-              <option value={6}>N/A</option>
+              <option value={6}>N/A</option> */}
             </Field>
           </Grid>
           <Grid item xs={6}>
