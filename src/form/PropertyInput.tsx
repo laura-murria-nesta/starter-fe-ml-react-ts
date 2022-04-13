@@ -1,8 +1,9 @@
 import { Button, Grid } from "@mui/material";
 import { Field, Form, Formik } from "formik";
-import React from "react";
-import { EPC, PremisesInfo, Region } from "../data";
 import * as Yup from 'yup';
+import React from "react";
+import { EPC, PremiseAge, PremisesInfo, Region } from "../data";
+import { oneOfEnum } from "../util";
 
 export type PropertyInputProps = {
     onSubmit: any,
@@ -26,7 +27,7 @@ const PropertyInputValidationSchema =
         .min(1, 'Area seems too small for a valid estimate')
         .max(500, 'Area seems large. Use m2 not ft2. We are unable to estimate very large properties')
         .required('Required'),
-      age: Yup.string().required('Property age is required'),
+      age: oneOfEnum(PremiseAge).required('Choose an age bracket'),
       type: Yup.string().required('Property type is required'),
     }),
     epc: Yup.object().shape({
@@ -74,7 +75,7 @@ export function PropertyInput(props: PropertyInputProps & PropertyInputFormValue
               >
               What type of house is it?
               </label>
-              {touched.premisesInfo && touched.premisesInfo!.type && errors.premisesInfo!.type && <div>{errors.premisesInfo!.type}</div>}
+              {touched.premisesInfo && touched.premisesInfo!.type && errors.premisesInfo && errors.premisesInfo!.type && <div>{errors.premisesInfo!.type}</div>}
           </Grid>
           <Grid item xs={4}>
               <Field as="select" name="premisesInfo.type">       
@@ -92,7 +93,7 @@ export function PropertyInput(props: PropertyInputProps & PropertyInputFormValue
               >
               When was it built?
               </label>
-              {touched.premisesInfo && touched.premisesInfo!.age && errors.premisesInfo!.age && <div>{errors.premisesInfo!.age}</div>}
+              {touched.premisesInfo && touched.premisesInfo!.age && errors.premisesInfo && errors.premisesInfo!.age && <div>{errors.premisesInfo!.age}</div>}
           </Grid>
           <Grid item xs={4}>
               <Field as="select" name="premisesInfo.age"> 
@@ -109,7 +110,7 @@ export function PropertyInput(props: PropertyInputProps & PropertyInputFormValue
               >
               How many bedrooms and living rooms?
               </label>
-              {touched.premisesInfo && touched.premisesInfo!.numRooms && errors.premisesInfo!.numRooms && <div>{errors.premisesInfo!.numRooms}</div>}
+              {touched.premisesInfo && touched.premisesInfo!.numRooms && errors.premisesInfo && errors.premisesInfo!.numRooms && <div>{errors.premisesInfo!.numRooms}</div>}
           </Grid>
           <Grid item xs={4}>
               <Field type="number" name="premisesInfo.numRooms" />
@@ -120,7 +121,7 @@ export function PropertyInput(props: PropertyInputProps & PropertyInputFormValue
               >
               Floor area (approx)
               </label>
-              {touched.premisesInfo && touched.premisesInfo!.floorArea && errors.premisesInfo!.floorArea && <div>{errors.premisesInfo!.floorArea}</div>}
+              {touched.premisesInfo && touched.premisesInfo!.floorArea && errors.premisesInfo && errors.premisesInfo!.floorArea && <div>{errors.premisesInfo!.floorArea}</div>}
           </Grid>
           <Grid item xs={4}>
               <Field name="premisesInfo.floorArea" />&nbsp;m<sup>2</sup>
