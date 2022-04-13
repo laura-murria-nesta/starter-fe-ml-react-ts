@@ -7,29 +7,35 @@ export type ExistingHeatingInfo = {
     typicalRadiatorType: RadiatorType,
 }
 
-export enum EPCEnergyPerfRating {
-   ' ' = 0,
-   'very good'  = 5,
-   'good' = 4,
-   'average' = 3,
-   'poor' = 2,
-   'very poor' = 1,
-   'N/A' = 6,
+export type EPCEnergyPerfRating = {
+    key: string,
+    value: number,
+    label: string,
 }
+export const EPCEnergyPerfRatings: EPCEnergyPerfRating[] =  [
+    { key: 'NOT_SET', value: 0, label: '--Please select --' },
+    { key: 'VERY_POOR', value: 1, label: 'Very Poor' },
+    { key: 'POOR', value: 2, label: 'Poor' },
+    { key: 'AVERAGE', value: 3, label: 'Average' },
+    { key: 'GOOD', value: 4, label: 'Good' },
+    { key: 'VERY_GOOD', value: 5, label: 'Very Good' },
+    { key: 'N_A', value: 6, label: 'N/A' },
+]
 
 export type PropertyFeaturesEnergyPerformance = {
-    wall: EPCEnergyPerfRating,
-    roof: EPCEnergyPerfRating,
-    window: EPCEnergyPerfRating,
-    floor: EPCEnergyPerfRating | null,
-    hotWater:  EPCEnergyPerfRating| null,
-    mainHeating: EPCEnergyPerfRating | null,
-    mainHeatingControl: EPCEnergyPerfRating | null,
-    secondaryHeating: EPCEnergyPerfRating | null,
+    wall: string,
+    roof: string,
+    window: string,
+    floor?: EPCEnergyPerfRating,
+    hotWater?:  EPCEnergyPerfRating,
+    mainHeating?: EPCEnergyPerfRating,
+    mainHeatingControl?: EPCEnergyPerfRating,
+    secondaryHeating?: EPCEnergyPerfRating,
 }
 
+// null id indicates customer provided values not formal EPC values
 export type EPC = {
-    id: number
+    id: number | null
     energyPerformance: PropertyFeaturesEnergyPerformance,
 }
 

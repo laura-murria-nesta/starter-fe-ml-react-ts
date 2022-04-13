@@ -2,7 +2,7 @@ import { Button, Grid } from "@mui/material";
 import { Field, Form, Formik } from "formik";
 import * as Yup from 'yup';
 import React from "react";
-import { EPC, EPCEnergyPerfRating, PremiseAge, PremisesInfo, Region } from "../data";
+import { EPC, EPCEnergyPerfRatings, PremiseAge, PremisesInfo, Region } from "../data";
 import { oneOfEnum } from "../util";
 
 export type PropertyInputProps = {
@@ -31,7 +31,11 @@ const PropertyInputValidationSchema =
       type: Yup.string().required('Property type is required'),
     }),
     epc: Yup.object().shape({
-
+      energyPerformance: Yup.object().shape({
+        wall: Yup.string(),
+        roof: Yup.string(),
+        window: Yup.string(),
+      }),
     }),
 });
 
@@ -133,30 +137,10 @@ export function PropertyInput(props: PropertyInputProps & PropertyInputFormValue
             <label htmlFor="epc-label-wall">Wall</label>
           </Grid>
           <Grid item xs={6}>  
-          {/* {JSON.stringify(enumObject(EPCEnergyPerfRating))} */}
             <Field as="select" name="epc.energyPerformance.wall" >
-            {/* {Object.keys(EPCEnergyPerfRating).filter(value => typeof value === 'string').map(key => (
-              <option value={key}>{EPCEnergyPerfRating[key as any]}</option>
-            ))} */}
-            {/* {enumObject(EPCEnergyPerfRating).map(key) => (
-              <option value={key}>{key[key as any]}</option>
-            ))} */}
-            {Object.keys(EPCEnergyPerfRating)
-            //.filter(key => typeof key === 'string')
-            .map(key => (
-            <>
-              <div>{JSON.stringify(key)}</div>
-              <option value={key}>{EPCEnergyPerfRating[key as any]}</option>
-              </>
+            {EPCEnergyPerfRatings.map(item => (
+              <option key={`wall-${item.value}`} value={item.value}>{item.label}</option>
             ))}
-
-              {/* <option value={0}>--Please select--</option>
-              <option value={1}>Very good</option>
-              <option value={2}>Good</option>
-              <option value={3}>Average</option>
-              <option value={4}>Poor</option>
-              <option value={5}>Very poor</option>
-              <option value={6}>N/A</option> */}
             </Field>
           </Grid>
           <Grid item xs={6}>
@@ -164,13 +148,9 @@ export function PropertyInput(props: PropertyInputProps & PropertyInputFormValue
           </Grid>
           <Grid item xs={6}>  
             <Field as="select" name="epc.energyPerformance.roof" >
-              <option value={0}>--Please select--</option>
-              <option value={1}>Very good</option>
-              <option value={2}>Good</option>
-              <option value={3}>Average</option>
-              <option value={4}>Poor</option>
-              <option value={5}>Very poor</option>
-              <option value={6}>N/A</option>
+            {EPCEnergyPerfRatings.map(item => (
+              <option key={`roof-${item.value}`} value={item.value}>{item.label}</option>
+            ))}
             </Field>
           </Grid>
           <Grid item xs={6}>
@@ -178,55 +158,9 @@ export function PropertyInput(props: PropertyInputProps & PropertyInputFormValue
           </Grid>
           <Grid item xs={6}>  
             <Field as="select" name="epc.energyPerformance.window" >
-              <option value={0}>--Please select--</option>
-              <option value={1}>Very good</option>
-              <option value={2}>Good</option>
-              <option value={3}>Average</option>
-              <option value={4}>Poor</option>
-              <option value={5}>Very poor</option>
-              <option value={6}>N/A</option>
-            </Field>
-          </Grid>
-          <Grid item xs={6}>
-            <label htmlFor="epc-label-roof">Floor</label>
-          </Grid>
-          <Grid item xs={6}>  
-            <Field as="select" name="epc.energyPerformance.floor" >
-              <option value={0}>--Please select--</option>
-              <option value={1}>Very good</option>
-              <option value={2}>Good</option>
-              <option value={3}>Average</option>
-              <option value={4}>Poor</option>
-              <option value={5}>Very poor</option>
-              <option value={6}>N/A</option>
-            </Field>
-          </Grid>
-          <Grid item xs={6}>
-            <label htmlFor="epc-label-roof">Main Heating</label>
-          </Grid>
-          <Grid item xs={6}>  
-            <Field as="select" name="epc.energyPerformance.mainHeating" >
-              <option value={0}>--Please select--</option>
-              <option value={1}>Very good</option>
-              <option value={2}>Good</option>
-              <option value={3}>Average</option>
-              <option value={4}>Poor</option>
-              <option value={5}>Very poor</option>
-              <option value={6}>N/A</option>
-            </Field>
-          </Grid>
-          <Grid item xs={6}>
-            <label htmlFor="epc-label-roof">Hot Water</label>
-          </Grid>
-          <Grid item xs={6}>  
-            <Field as="select" name="epc.energyPerformance.hotWater" >
-              <option value={0}>--Please select--</option>
-              <option value={1}>Very good</option>
-              <option value={2}>Good</option>
-              <option value={3}>Average</option>
-              <option value={4}>Poor</option>
-              <option value={5}>Very poor</option>
-              <option value={6}>N/A</option>
+              {EPCEnergyPerfRatings.map(item => (
+                <option key={`window-${item.value}`} value={item.value}>{item.label}</option>
+              ))}
             </Field>
           </Grid>
           <Grid item xs={12}>

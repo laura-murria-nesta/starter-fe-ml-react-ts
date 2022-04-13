@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Alert, Box, Button, Grid } from '@mui/material';
 
-import {  EPC, ExistingHeatingInfo, PremiseAge, PremisesInfo, PremiseType, Region } from './data';
+import {  EPC, EPCEnergyPerfRatings, ExistingHeatingInfo, PremiseAge, PremisesInfo, PremiseType, Region } from './data';
 import { InputParams, predict } from './model';
 
 
@@ -11,10 +11,12 @@ import { PropertyInput, PropertyInputFormValues } from "./form/PropertyInput";
 
 export default function App() {
 
+  const noRatingSet =  EPCEnergyPerfRatings.find(element => element.key === 'NOT_SET')?.value.toString();
+
   const [ budget, setBudget ] = useState(null as ASHPBudget | null );
   const [ region, setRegion ] = useState(Region.Scotland);
   const [ premisesInfo, setPremisesInfo ] = useState({ floorArea: 0, numRooms: 0 , age: PremiseAge.Band1, type: PremiseType.SemiDetached } as PremisesInfo);
-  const [ epc, setEPC ] = useState({ energyPerformance: { wall: 0, floor: 0, window: 0, mainHeating: 0, hotWater: 0 }} as EPC);
+  const [ epc, setEPC ] = useState({ id: null, energyPerformance: { wall: noRatingSet,  window: noRatingSet, roof: noRatingSet }} as EPC);
   const [ error, setError ] = useState(null as string | null);
   const [ existingHeatingInfo, setExistingHeatingInfo ] = useState({} as ExistingHeatingInfo);
   // const [ HPReadyAdvice, setHPReadyAdvice ] = useState (null as HPReadyAdvice | null );
@@ -54,9 +56,16 @@ export default function App() {
   };
 
   const resetInput = () => {
+    
     setError(null);
     setPremisesInfo({ floorArea: 0, numRooms: 0 , age: PremiseAge.Band1, type: PremiseType.SemiDetached } as PremisesInfo);
-    setEPC({ energyPerformance: { wall: 0, floor: 0, window: 0, mainHeating: 0, hotWater: 0 }} as EPC);
+    setEPC({ 
+      id: null, 
+      energyPerformance: { 
+        wall: noRatingSet,
+        roof: noRatingSet, 
+        window: noRatingSet
+      } } as EPC);
     setExistingHeatingInfo({} as ExistingHeatingInfo);
     setRegion(Region.Scotland);
     resetOutput();

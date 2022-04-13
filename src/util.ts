@@ -17,5 +17,11 @@ export const enumObject = <Enum extends Record<string, number | string>>(e: Enum
       return copy;
   };
 
+export const enumKeys = <Enum extends Record<string, number | string>>(e: Enum) => {
+    return Object.keys(enumObject(e)) as EnumKeys<Enum>[];
+};
   
+export const enumValues = <Enum extends Record<string, number | string>>(e: Enum) => {
+  return [...new Set(Object.values(enumObject(e)))] as Enum[EnumKeys<Enum>][];
+};
  
