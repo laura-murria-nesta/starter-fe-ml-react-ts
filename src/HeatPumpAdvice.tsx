@@ -22,7 +22,7 @@ export default function App() {
 
   const handleSubmitPropertyInput = (propertyInput: PropertyInputFormValues) => {
     try { 
-      console.log(`Handling propertyInput: ${JSON.stringify(propertyInput)}`);
+      console.log(`UI handling input: ${JSON.stringify(propertyInput)}`);
       setPremisesInfo(propertyInput.premisesInfo);
       setEPC(propertyInput.epc)
       setRegion(propertyInput.region)

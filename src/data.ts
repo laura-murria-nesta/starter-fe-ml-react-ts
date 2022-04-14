@@ -19,7 +19,7 @@ export const EPCEnergyPerfRatings: Lookup[] =  [
     { key: 'AVERAGE', value: 3, label: 'Average' },
     { key: 'GOOD', value: 4, label: 'Good' },
     { key: 'VERY_GOOD', value: 5, label: 'Very Good' },
-    { key: 'N_A', value: 6, label: 'N/A' },
+    { key: 'N_A', value: 6, label: 'Unknown / No EPC' },
 ]
 
 export type PropertyFeaturesEnergyPerformance = {

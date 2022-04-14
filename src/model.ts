@@ -13,6 +13,10 @@ export type Result = {
 }
 
 export const predict = (input: InputParams): Result => {
+    
+    console.log(`Dummy model invoked with values: ${JSON.stringify(input)}`);
+    const result = 10000;
+    console.log(`Dummy model returning placeholder estimate: ${result}`);
     return {typicalTotalCost: 10000} as Result;
 };
 
